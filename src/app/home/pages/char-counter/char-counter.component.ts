@@ -1,33 +1,8 @@
-import { Container } from '@angular/compiler/src/i18n/i18n_ast';
-import { Component, OnInit, SimpleChanges } from '@angular/core';
-import { forkJoin, Observable } from 'rxjs';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { forkJoin } from 'rxjs';
 import { CharactersService } from '../../services/characters/characters.service';
-import { map, catchError } from 'rxjs/operators';
-
-interface Character {
-  name: string;
-}
-
-interface MainData {
-  characters: Character[]
-}
-
-interface RestData {
-  info: any;
-  results: any;
-}
-
-interface HttpCalls {
-  charactersCalls: any[];
-  episodesCalls: any[];
-  locationsCalls: any[]
-}
-
-interface totalPages {
-  totalPagesChar: number;
-  totalPagesEp: number;
-  totalPagesLoc: number;
-}
+import { EpisodesService } from '../../services/episodes/episodes.service';
+import { LocationsService } from '../../services/locations/locations.service';
 
 interface mainCounter {
   counterChar: number;
@@ -41,44 +16,82 @@ interface mainCounter {
   styleUrls: ['./char-counter.component.scss']
 })
 export class CharCounterComponent implements OnInit {
-  currentPage: number = 1;
-  totalPage: totalPages = { totalPagesChar: 0, totalPagesEp: 0, totalPagesLoc: 0 };
   counter: mainCounter = { counterChar: 0, counterEp: 0, counterLoc: 0 };
-  data: MainData = { characters: [] };
-  constructor(public _charactersService: CharactersService) { }
+  readyFlag: mainCounter = { counterChar: 0, counterEp: 0, counterLoc: 0 };
+  startDate!: Date;
+  endDate!: Date;
+  constructor(
+    public _characterService: CharactersService,
+    public _episodeService: EpisodesService,
+    public _locationService: LocationsService
+  ) { }
 
   ngOnInit(): void {
+    this.startDate = new Date();
     this.selectData('characters');
+    this.selectData('episodes');
+    this.selectData('locations');
   }
 
   selectData(type: string) {
-    if (type = 'characters') {
-      this._charactersService.getCharacters(1).subscribe(characters => {
+    if (type == 'characters') {
+      this._characterService.getCharacters(1).subscribe(characters => {
         this.listData(characters, type)
-      })
+      });
+    } else if (type == 'episodes') {
+      this._episodeService.getEpisodes(1).subscribe(episodes => {
+        this.listData(episodes, type)
+      });
+    } else if (type == 'locations') {
+      this._locationService.getLocations(1).subscribe(location => {
+        this.listData(location, type)
+      });
     }
   }
 
   listData(data: any, type: string) {
-    data.results.forEach((characters: any, index: number) => {
+    data.results.forEach((characters: any) => {
       this.setCounter(type, characters.name);
     });
     if (data.info.pages > 1) {
       var httpCalls = this.setHttpCalls(data.info.pages, type);
       forkJoin(httpCalls).subscribe(data => {
         data.forEach(page => {
-          page.results.forEach((characters: any, index: number) => {
+          page.results.forEach((characters: any) => {
             this.setCounter(type, characters.name);
           });
         });
-        console.log(this.counter.counterChar)
+        this.setFlag(type)
+        this.checkEndOfProgram();
+        console.log(this.counter, this.readyFlag)
       });
+    }
+  }
+
+  checkEndOfProgram() {
+    if (this.readyFlag.counterChar == 1 && this.readyFlag.counterEp == 1 && this.readyFlag.counterLoc == 1) {
+      this.endDate = new Date();
+    }
+  }
+
+  setFlag(type: string) {
+    console.log(type)
+    if (type == 'characters') {
+      this.readyFlag.counterChar = 1;
+    } else if (type == 'episodes') {
+      this.readyFlag.counterEp = 1;
+    } else if (type == 'locations') {
+      this.readyFlag.counterLoc = 1;
     }
   }
 
   setCounter(type: string, name: string) {
     if (type == 'characters') {
       this.counter.counterChar = this.counter.counterChar + this.countWordCharacters('c', name);
+    } else if (type == 'episodes') {
+      this.counter.counterEp = this.counter.counterEp + this.countWordCharacters('e', name)
+    } else if (type == 'locations') {
+      this.counter.counterLoc = this.counter.counterLoc + this.countWordCharacters('l', name)
     }
   }
 
@@ -86,7 +99,11 @@ export class CharCounterComponent implements OnInit {
     var httpCalls = [];
     for (let index = 2; index <= totalPages; index++) {
       if (type == 'characters') {
-        httpCalls.push(this._charactersService.getCharacters(index))
+        httpCalls.push(this._characterService.getCharacters(index))
+      } else if (type == 'episodes') {
+        httpCalls.push(this._episodeService.getEpisodes(index))
+      } else if (type == 'locations') {
+        httpCalls.push(this._locationService.getLocations(index))
       }
     }
     return httpCalls
@@ -95,12 +112,5 @@ export class CharCounterComponent implements OnInit {
   countWordCharacters(char: string, word: string) {
     var re = new RegExp(char, 'g');
     return (word.toLowerCase().match(re) || []).length;
-  }
-
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (this.currentPage) {
-      console.log(changes.currentPage.currentValue);
-    }
   }
 }

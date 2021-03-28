@@ -1,1 +1,5 @@
-<p>char-counter works!</p>
+<p *ngIf="readyFlag.counterChar">Letras c en personajes: {{counter.counterChar}}</p>
+<p *ngIf="readyFlag.counterEp">Letras e en episodios: {{counter.counterEp}}</p>
+<p *ngIf="readyFlag.counterLoc">Letras l en ubicaciones: {{counter.counterLoc}}</p>
+<p></p>
+<app-char-counter-timer [startDate]="startDate" [endDate]="endDate" *ngIf="endDate"></app-char-counter-timer>

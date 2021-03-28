@@ -4,10 +4,11 @@ import { CharCounterComponent } from './pages/char-counter/char-counter.componen
 import { EpisodeLocationsComponent } from './pages/episode-locations/episode-locations.component';
 import { SharedModule } from '../shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
+import { CharCounterTimerComponent } from './pages/char-counter/char-counter-timer/char-counter-timer.component';
 
 
 @NgModule({
-  declarations: [CharCounterComponent, EpisodeLocationsComponent],
+  declarations: [CharCounterComponent, EpisodeLocationsComponent, CharCounterTimerComponent],
   imports: [
     CommonModule,
     SharedModule
