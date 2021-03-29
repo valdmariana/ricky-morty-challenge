@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { CharactersService } from '../../services/characters/characters.service';
 import { EpisodesService } from '../../services/episodes/episodes.service';
@@ -63,7 +63,6 @@ export class CharCounterComponent implements OnInit {
         });
         this.setFlag(type)
         this.checkEndOfProgram();
-        console.log(this.counter, this.readyFlag)
       });
     }
   }

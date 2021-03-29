@@ -14,4 +14,8 @@ export class CharactersService {
     const params = new HttpParams().set('page', page.toString())
     return this.http.get(GlobalConstants.apiURL + 'character', { params });
   }
+
+  getCharacter(id: string): Observable<any> {
+    return this.http.get(GlobalConstants.apiURL + 'character/' + id);
+  }
 }
