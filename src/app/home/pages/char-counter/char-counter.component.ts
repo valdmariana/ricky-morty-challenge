@@ -74,7 +74,6 @@ export class CharCounterComponent implements OnInit {
   }
 
   setFlag(type: string) {
-    console.log(type)
     if (type == 'characters') {
       this.readyFlag.counterChar = 1;
     } else if (type == 'episodes') {

@@ -1,5 +1,26 @@
-<p *ngIf="readyFlag.counterChar">Letras c en personajes: {{counter.counterChar}}</p>
-<p *ngIf="readyFlag.counterEp">Letras e en episodios: {{counter.counterEp}}</p>
-<p *ngIf="readyFlag.counterLoc">Letras l en ubicaciones: {{counter.counterLoc}}</p>
-<p></p>
-<app-char-counter-timer [startDate]="startDate" [endDate]="endDate" *ngIf="endDate"></app-char-counter-timer>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card text-white bg-secondary mb-3">
+            <div class="card-header">Char counter</div>
+            <div class="card-body">
+                <div *ngIf="readyFlag.counterChar && readyFlag.counterEp && readyFlag.counterLoc">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-secondary">
+                            Letras c en personajes: <b>{{counter.counterChar}}</b>
+                        </li>
+                        <li class="list-group-item list-group-item-secondary">
+                            Letras e en episodios: <b>{{counter.counterEp}}</b>
+                        </li>
+                        <li class="list-group-item list-group-item-secondary">
+                            Letras l en ubicaciones: <b>{{counter.counterLoc}}</b>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-footer">
+                <app-timer [startDate]="startDate" [endDate]="endDate" *ngIf="endDate">
+                </app-timer>
+            </div>
+        </div>
+    </div>
+</div>

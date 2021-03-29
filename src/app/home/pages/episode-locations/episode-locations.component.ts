@@ -64,9 +64,9 @@ export class EpisodeLocationsComponent implements OnInit {
       // console.log(this.episodes.length, totalPages)
       if (this.episodes.length == totalPages) {
         this.endDate = new Date()
-        console.log('Termino', this.startDate, this.endDate)
+        // console.log('Termino', this.startDate, this.endDate)
       }
-      console.log(this.episodes)
+      // console.log(this.episodes)
     });
   }
 

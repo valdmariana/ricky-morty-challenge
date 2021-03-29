@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-char-counter-timer',
-  templateUrl: './char-counter-timer.component.html',
-  styleUrls: ['./char-counter-timer.component.scss']
+  selector: 'app-timer',
+  templateUrl: './timer.component.html',
+  styleUrls: ['./timer.component.scss']
 })
-export class CharCounterTimerComponent implements OnInit {
+export class TimerComponent implements OnInit {
 
   @Input() startDate!: Date;
   @Input() endDate!: Date;

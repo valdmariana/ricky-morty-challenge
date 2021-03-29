@@ -1,8 +1,17 @@
-<p>episode-locations works!</p>
-<div *ngFor="let episode of episodes">
-    <p>{{episode.episode}}: {{episode.name}}</p>
-    <ul>
-        <li *ngFor="let location of episode.locations">{{location}}</li>
-    </ul>
+<div class="accordion">
+    <app-timer [startDate]="startDate" [endDate]="endDate" *ngIf="endDate"></app-timer>
+    <div class="card" *ngFor="let episode of episodes">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+                {{episode.episode}}. {{episode.name}} ({{episode.countCharacters}} personajes)
+            </h5>
+        </div>
+        <div>
+            <div class="card-body">
+                <ul>
+                    <li *ngFor="let location of episode.locations">{{location}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
-<app-char-counter-timer [startDate]="startDate" [endDate]="endDate" *ngIf="endDate"></app-char-counter-timer>
