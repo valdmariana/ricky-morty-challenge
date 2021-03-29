@@ -7,9 +7,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TimerComponent } from './components/timer/timer.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
-  declarations: [HeaderComponent, TimerComponent],
+  declarations: [HeaderComponent, TimerComponent, FooterComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -28,7 +29,8 @@ import { TimerComponent } from './components/timer/timer.component';
     FormsModule,
     NgbModule,
     HeaderComponent,
-    TimerComponent
+    TimerComponent,
+    FooterComponent
   ]
 })
 export class SharedModule { }

@@ -1,3 +1,4 @@
+<a class="btn btn-success mb-4" [routerLink]="['/home']">Volver al home</a>
 <div class="accordion">
     <app-timer [startDate]="startDate" [endDate]="endDate" *ngIf="endDate"></app-timer>
     <div class="card" *ngFor="let episode of episodes">
