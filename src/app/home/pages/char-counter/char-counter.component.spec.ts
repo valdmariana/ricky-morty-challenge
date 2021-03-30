@@ -1,16 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CharCounterComponent } from './char-counter.component';
 import { EpisodesService } from '../../services/episodes/episodes.service';
 import { CharactersService } from '../../services/characters/characters.service';
 import { LocationsService } from '../../services/locations/locations.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('CharCounterComponent', () => {
   let component: CharCounterComponent;
   let fixture: ComponentFixture<CharCounterComponent>;
 
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [HttpClientTestingModule],
+    imports: [HttpClientTestingModule, RouterTestingModule],
     providers: [EpisodesService, CharactersService, LocationsService]
   }));
 

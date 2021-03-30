@@ -4,17 +4,14 @@
         <div class="card text-white bg-secondary mb-3">
             <div class="card-header">Char counter</div>
             <div class="card-body">
-                <div *ngIf="readyFlag.counterChar && readyFlag.counterEp && readyFlag.counterLoc">
+                <div>
                     <ul class="list-group">
-                        <li class="list-group-item list-group-item-secondary">
-                            Letras c en personajes: <b>{{counter.counterChar}}</b>
-                        </li>
-                        <li class="list-group-item list-group-item-secondary">
-                            Letras e en episodios: <b>{{counter.counterEp}}</b>
-                        </li>
-                        <li class="list-group-item list-group-item-secondary">
-                            Letras l en ubicaciones: <b>{{counter.counterLoc}}</b>
-                        </li>
+                        <app-char-counter-info [type]="'characters'" (setCounter)="setFlags($event)">
+                        </app-char-counter-info>
+                        <app-char-counter-info [type]="'episodes'" (setCounter)="setFlags($event)">
+                        </app-char-counter-info>
+                        <app-char-counter-info [type]="'locations'" (setCounter)="setFlags($event)">
+                        </app-char-counter-info>
                     </ul>
                 </div>
             </div>

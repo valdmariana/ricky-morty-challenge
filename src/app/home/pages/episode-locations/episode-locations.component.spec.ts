@@ -4,13 +4,14 @@ import { EpisodeLocationsComponent } from './episode-locations.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { EpisodesService } from '../../services/episodes/episodes.service';
 import { CharactersService } from '../../services/characters/characters.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('EpisodeLocationsComponent', () => {
   let component: EpisodeLocationsComponent;
   let fixture: ComponentFixture<EpisodeLocationsComponent>;
 
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [HttpClientTestingModule],
+    imports: [HttpClientTestingModule, RouterTestingModule],
     providers: [EpisodesService, CharactersService]
   }));
 

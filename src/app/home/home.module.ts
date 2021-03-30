@@ -5,17 +5,18 @@ import { EpisodeLocationsComponent } from './pages/episode-locations/episode-loc
 import { SharedModule } from '../shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './pages/home/home.component';
+import { CharCounterInfoComponent } from './pages/char-counter/char-counter-info/char-counter-info.component';
 
 
 @NgModule({
-  declarations: [CharCounterComponent, EpisodeLocationsComponent, HomeComponent],
+  declarations: [CharCounterComponent, EpisodeLocationsComponent, HomeComponent, CharCounterInfoComponent],
   imports: [
     CommonModule,
     SharedModule
   ],
   exports: [
     SharedModule,
-    HomeRoutingModule
+    HomeRoutingModule,
   ]
 })
 export class HomeModule { }
