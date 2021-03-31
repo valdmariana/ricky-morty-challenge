@@ -26,10 +26,10 @@ export class EpisodeLocationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.startDate = new Date();
-    this.listData()
+    this.listEpisodes()
   }
 
-  listData() {
+  listEpisodes() {
     this._episodeService.getEpisodes(1).subscribe((response) => {
       response.results.forEach((episode: any) => {
         this.listChars(episode.characters, episode.id, episode.name, episode.episode, episode.characters.length, response.info.count);
@@ -61,12 +61,9 @@ export class EpisodeLocationsComponent implements OnInit {
         }
       });
       this.episodes.push({ id, name, countCharacters, episode, locations });
-      // console.log(this.episodes.length, totalPages)
       if (this.episodes.length == totalPages) {
         this.endDate = new Date()
-        // console.log('Termino', this.startDate, this.endDate)
       }
-      // console.log(this.episodes)
     });
   }
 

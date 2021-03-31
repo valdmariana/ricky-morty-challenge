@@ -22,11 +22,7 @@ export class CharCounterComponent implements OnInit {
   readyFlag: ReadyFlag = { characters: 0, episodes: 0, locations: 0 };
   startDate!: Date;
   endDate!: Date;
-  constructor(
-    public _characterService: CharactersService,
-    public _episodeService: EpisodesService,
-    public _locationService: LocationsService
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.startDate = new Date();

@@ -10,10 +10,10 @@ import { LocationsService } from '../../../services/locations/locations.service'
   styleUrls: ['./char-counter-info.component.scss']
 })
 export class CharCounterInfoComponent implements OnInit {
-  @Input() type!: string;
+  @Input() type: string = '';
   @Output() setCounter = new EventEmitter<string>();
-
   counter: number = 0;
+
   constructor(public _characterService: CharactersService,
     public _episodeService: EpisodesService,
     public _locationService: LocationsService) { }
@@ -24,30 +24,33 @@ export class CharCounterInfoComponent implements OnInit {
 
   countData() {
     if (this.type == 'characters') {
+      const letter = 'c';
       this._characterService.getCharacters(1).subscribe(characters => {
-        this.listData(characters)
+        this.listData(characters, letter)
       });
     } else if (this.type == 'episodes') {
+      const letter = 'e';
       this._episodeService.getEpisodes(1).subscribe(episodes => {
-        this.listData(episodes)
+        this.listData(episodes, letter)
       });
     } else if (this.type == 'locations') {
+      const letter = 'l';
       this._locationService.getLocations(1).subscribe(location => {
-        this.listData(location)
+        this.listData(location, letter)
       });
     }
   }
 
-  listData(data: any) {
+  listData(data: any, letter: string) {
     data.results.forEach((character: any) => {
-      this.counter = this.counter + this.countWordCharacters('c', character.name);
+      this.counter = this.counter + this.countWordCharacters(letter, character.name);
     });
     if (data.info.pages > 1) {
       var httpCalls = this.setHttpCalls(data.info.pages);
       forkJoin(httpCalls).subscribe(data => {
         data.forEach(page => {
           page.results.forEach((character: any) => {
-            this.counter = this.counter + this.countWordCharacters('c', character.name);
+            this.counter = this.counter + this.countWordCharacters(letter, character.name);
           });
         });
         this.emitCounterReady()

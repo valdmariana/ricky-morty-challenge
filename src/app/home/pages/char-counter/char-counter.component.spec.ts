@@ -5,6 +5,7 @@ import { EpisodesService } from '../../services/episodes/episodes.service';
 import { CharactersService } from '../../services/characters/characters.service';
 import { LocationsService } from '../../services/locations/locations.service';
 import { RouterTestingModule } from '@angular/router/testing';
+import { CharCounterInfoComponent } from './char-counter-info/char-counter-info.component';
 
 describe('CharCounterComponent', () => {
   let component: CharCounterComponent;
@@ -17,7 +18,7 @@ describe('CharCounterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CharCounterComponent]
+      declarations: [CharCounterComponent, CharCounterInfoComponent]
     })
       .compileComponents();
   });
@@ -30,5 +31,32 @@ describe('CharCounterComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('setFlags should set the readyFlag', () => {
+    const type = 'characters'
+    const spy1 = spyOn(component, 'checkEndOfProgram')
+    expect(component.readyFlag[type]).toBe(0)
+    component.setFlags(type)
+    expect(component.readyFlag[type]).toBe(1)
+    expect(spy1).toHaveBeenCalled()
+  });
+
+  it('checkEndOfProgram should set endDate on finish counting', () => {
+    component.readyFlag['characters'] = 1;
+    component.readyFlag['episodes'] = 1;
+    component.readyFlag['locations'] = 1;
+    expect(component.endDate).toBeUndefined();
+    component.checkEndOfProgram()
+    expect(component.endDate).not.toBeNull()
+  });
+
+  it('checkEndOfProgram should not set endDate if the program has not finished counting', () => {
+    component.readyFlag['characters'] = 0;
+    component.readyFlag['episodes'] = 1;
+    component.readyFlag['locations'] = 1;
+    expect(component.endDate).toBeUndefined();
+    component.checkEndOfProgram()
+    expect(component.endDate).toBeUndefined()
   });
 });
