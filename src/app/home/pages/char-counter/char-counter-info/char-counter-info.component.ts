@@ -42,15 +42,15 @@ export class CharCounterInfoComponent implements OnInit {
   }
 
   listData(data: any, letter: string) {
-    data.results.forEach((character: any) => {
-      this.counter = this.counter + this.countWordCharacters(letter, character.name);
+    data.results.forEach((element: any) => {
+      this.counter = this.counter + this.countWordCharacters(letter, element.name);
     });
     if (data.info.pages > 1) {
       var httpCalls = this.setHttpCalls(data.info.pages);
       forkJoin(httpCalls).subscribe(data => {
         data.forEach(page => {
-          page.results.forEach((character: any) => {
-            this.counter = this.counter + this.countWordCharacters(letter, character.name);
+          page.results.forEach((element: any) => {
+            this.counter = this.counter + this.countWordCharacters(letter, element.name);
           });
         });
         this.emitCounterReady()

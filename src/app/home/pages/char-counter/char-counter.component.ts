@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CharactersService } from '../../services/characters/characters.service';
-import { EpisodesService } from '../../services/episodes/episodes.service';
-import { LocationsService } from '../../services/locations/locations.service';
 
 interface IObjectKeys {
   [key: string]: number;
