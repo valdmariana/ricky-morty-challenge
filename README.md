@@ -1,27 +1,35 @@
-# RickMortyChallenge
+# Rick and Morty challenge
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.2.
+![alt text](https://i.blogs.es/b6d70c/rick-y-morty/1366_521.jpeg)
 
-## Development server
+Rick and Morty challenge es producto de la primera prueba técnica de Chipax y consta de dos funcionalidades principales:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+* **Char counter**: Cuenta las letras 'c' dentro de los *characters*, las letras l dentro de las *locations* y las letras 'e' dentro de los *episodes*.
 
-## Code scaffolding
+* **Episode locations**: Para cada *episode*, indicar la cantidad y un listado con las *location (origin)* de todos los *character* que aparecieron en ese *episode* (sin repetir).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+[Demo](https://valdmariana.github.io/ricky-morty-challenge/home)
 
-## Build
+## Instalación
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Asumiendo que ya tienes instalado [npm](https://www.npmjs.com/get-npm), al momento de clonar deberás instalar las dependencias necesarias para que el proyecto funcione:
 
-## Running unit tests
+```bash
+npm install
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Ejecución
 
-## Running end-to-end tests
+Asumiendo que ya tienes instalado [angular-cli](https://cli.angular.io/), ejecuta el siguiente comando:
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```bash
+ng serve
+```
 
-## Further help
+## Pruebas
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Para ejecutar las pruebas unitarias solo debes ejecutar:
+
+```bash
+ng test
+```
